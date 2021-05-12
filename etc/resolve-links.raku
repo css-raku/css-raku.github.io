@@ -7,9 +7,9 @@ multi sub resolve-class(*@path ('CSS', Properties-path, *@)) {
     %( :repo<CSS-Properties-raku>, :@path );
 }
 
-subset Stylesheet-path of Str where 'Media'|'Stylesheet'|'Ruleset';
+subset Stylesheet-path of Str where 'Media'|'Stylesheet'|'Ruleset'|'Selectors';
 multi sub resolve-class(*@path ('CSS', Stylesheet-path, *@)) {
-    %( :repo<CSS-Selectors-raku>, :@path );
+    %( :repo<CSS-Stylesheet-raku>, :@path );
 }
 
 subset Module-path of Str where 'Grammar'|'Module'|'Specification';
