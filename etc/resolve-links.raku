@@ -12,6 +12,11 @@ multi sub resolve-class(*@path ('CSS', Stylesheet-path, *@)) {
     %( :repo<CSS-Stylesheet-raku>, :@path );
 }
 
+multi sub resolve-class(*@p ('CSS', 'Selector', 'To', 'XPath')) {
+    my $repo = @p.join('-') ~ '-raku';
+    %( :$repo, :path[] );
+}
+
 subset Module-path of Str where 'Grammar'|'Module'|'Specification';
 multi sub resolve-class( 'CSS', Module-path $module, *@) {
     %( :repo("CSS-{$module}-raku"), :path[] );
@@ -55,7 +60,7 @@ INIT {
         my @mod = $repo.split('-');
         @mod.pop if @mod.tail ~~ 'raku';
         my $mod = @mod.join: '-';
-        say " / [[$mod Module]]({$url})";
+        say " / [[$mod]]({$url})";
 
         with %info<path> {
             my @path = .list;
