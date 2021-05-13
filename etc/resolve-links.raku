@@ -20,8 +20,8 @@ multi sub resolve-class( 'CSS', Module-path $module, *@) {
 multi sub resolve-class('CSS') {
     %( :repo<CSS-raku>, :path[] );
 }
-multi sub resolve-class('CSS', 'TagSet', *@) {
-    %( :repo<CSS-raku>, :path[] );
+multi sub resolve-class(*@path ('CSS', 'TagSet', *@)) {
+    %( :repo<CSS-raku>, :@path );
 }
 
 multi sub resolve-class(*@path) {
@@ -59,10 +59,12 @@ INIT {
 
         with %info<path> {
             my @path = .list;
-            my $n = 2;
-            breadcrumb($url, @path, $n, :top);
-            breadcrumb($url, @path, $_)
-                for $n ^.. @path;
+            if @path {
+                my $n = 2;
+                breadcrumb($url, @path, $n, :top);
+                breadcrumb($url, @path, $_)
+                    for $n ^.. @path;
+            }
         }
         say '';
     }

@@ -19,7 +19,7 @@ Tool-Chain/Utility Modules
 Module | Description
 ------ | -----
 [CSS::Module::CSS3::Selectors](https://css-raku.github.io/CSS-Module-CSS3-Selectors-raku/) | CSS 3 Selector Syntax grammar
-[CSS::Selectors::To::XPath](https://css-raku.github.io/CSS-Selectors-To-XPath-raku/) | CSS Selector to XPath translator
+[CSS::Selector::To::XPath](https://css-raku.github.io/CSS-Selector-To-XPath-raku/) | CSS Selector to XPath translator
 [CSS::Writer](https://css-raku.github.io/CSS-Writer-raku/) | CSS AST Serializer
 [CSS::Specification](https://css-raku.github.io/CSS-Specification-raku/) | CSS Property definition grammar and generation tools
 
