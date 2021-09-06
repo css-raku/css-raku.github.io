@@ -1,13 +1,21 @@
+# This scripts rewrites MD links from [CSS::Foo](CSS::Foo) to [CSS::Foo](doc-url)
+
 constant DocRoot = "https://css-raku.github.io";
 
 multi sub resolve-class('LibXML') { :repo<https://libxml-raku.github.io/LibXML-raku/> }
 
+multi sub resolve-class(*@path ('CSS', 'Font', 'Resources', *@)) {
+    %( :repo<CSS-Font-Resources-raku>, :@path );
+}
+
+# CSS::Properties has several other CSS::Xxx namespaces
 subset Properties-path of Str where 'Properties'|'Box'|'Units'|'Font'|'PageBox';
 multi sub resolve-class(*@path ('CSS', Properties-path, *@)) {
     %( :repo<CSS-Properties-raku>, :@path );
 }
 
-subset Stylesheet-path of Str where 'Media'|'Stylesheet'|'Ruleset'|'Selectors';
+# CSS::Stylesheet has several other CSS::Xxx namespaces
+subset Stylesheet-path of Str where 'Media'|'Stylesheet'|'Ruleset'|'Selectors'|'AtPageRule'|'MediaQuery';
 multi sub resolve-class(*@path ('CSS', Stylesheet-path, *@)) {
     %( :repo<CSS-Stylesheet-raku>, :@path );
 }
@@ -17,16 +25,18 @@ multi sub resolve-class(*@p ('CSS', 'Selector', 'To', 'XPath')) {
     %( :$repo, :path[] );
 }
 
-subset Module-path of Str where 'Grammar'|'Module'|'Specification';
-multi sub resolve-class( 'CSS', Module-path $module, *@) {
+# These have a README only and could possibly do with more doco
+subset README-only-path of Str where 'Grammar'|'Module'|'Specification';
+multi sub resolve-class( 'CSS', README-only-path $module, *@) {
     %( :repo("CSS-{$module}-raku"), :path[] );
 }
 
 multi sub resolve-class('CSS') {
     %( :repo<CSS-raku>, :path[] );
 }
+
 multi sub resolve-class(*@path ('CSS', 'TagSet', *@)) {
-    %( :repo<CSS-raku>, :@path );
+    %( :repo<CSS-TagSet-raku>, :@path );
 }
 
 multi sub resolve-class(*@path) {
