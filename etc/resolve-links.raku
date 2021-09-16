@@ -8,6 +8,10 @@ multi sub resolve-class(*@path ('CSS', 'Font', 'Resources', *@)) {
     %( :repo<CSS-Font-Resources-raku>, :@path );
 }
 
+multi sub resolve-class(*@path ('CSS', 'URI')) {
+    %( :repo<CSS-Font-Resources-raku> );
+}
+
 # CSS::Properties has several other CSS::Xxx namespaces
 subset Properties-path of Str where 'Properties'|'Box'|'Units'|'Font'|'PageBox';
 multi sub resolve-class(*@path ('CSS', Properties-path, *@)) {
