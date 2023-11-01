@@ -47,9 +47,12 @@ multi sub resolve-class(*@path) {
     die "unable to resolve class {@path.join: '::'}";
 }
 
+sub is-abs($_) { .starts-with('http') }
+
 sub link-to-url(Str() $class-name) {
     my %info = resolve-class(|$class-name.split('::'));
-    my @path = DocRoot;
+    my @path;
+    @path.push: DocRoot unless is-abs(%info<repo>);
     @path.push: %info<repo>;
     @path.append(.list) with %info<path>;
     @path.join: '/';
